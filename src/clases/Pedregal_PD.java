@@ -28,22 +28,28 @@ public class Pedregal_PD {
 		}
 	}
 
-	public List<Casa> colocarCasa(int frente, int profundidad) throws FileNotFoundException {
+	public List<Casa> colocarCasas(int frente, int profundidad) throws FileNotFoundException {
+		this.colocarCasaUnSentido(frente, profundidad);// Sentido Sur
+		this.colocarCasaUnSentido(profundidad, frente);// Sentido Oeste
+		return this.casas;
+	}
+
+	private void colocarCasaUnSentido(int frente, int profundidad) throws FileNotFoundException {
 		if (frente >= acumulada.length)
-			return null;
+			return;
 		if (profundidad >= acumulada[0].length)
-			return null;
+			return;
 		if (acumulada[frente - 1][profundidad - 1] == 0) {
-			casas.add(new Casa(frente, profundidad,frente,profundidad));
+			casas.add(new Casa(frente, profundidad, frente, profundidad));
 		}
 		for (int i = 1; i < acumulada.length - frente; i++) {
 			if (acumulada[i - 1][profundidad - 1] - acumulada[i + frente - 1][profundidad - 1] == 0) {
-				casas.add(new Casa(i + 1, 1,frente,profundidad));
+				casas.add(new Casa(i + 1, 1, frente, profundidad));
 			}
 		}
 		for (int i = 1; i < acumulada[i].length - profundidad; i++) {
 			if (acumulada[frente - 1][i - 1] - acumulada[frente - 1][i + profundidad - 1] == 0) {
-				casas.add(new Casa(1, i + 1,frente,profundidad));
+				casas.add(new Casa(1, i + 1, frente, profundidad));
 			}
 		}
 		for (int i = 1; i < acumulada.length - frente; i++) {
@@ -51,11 +57,10 @@ public class Pedregal_PD {
 				int f = i + frente - 1;
 				int c = j + profundidad - 1;
 				if ((acumulada[f][c] - acumulada[f][j - 1] - acumulada[i - 1][c] + acumulada[i - 1][j - 1]) == 0) {
-					casas.add(new Casa(i + 1, j + 1,frente,profundidad));
+					casas.add(new Casa(i + 1, j + 1, frente, profundidad));
 				}
 			}
 		}
-		return casas;
 	}
 
 	public void mostrarTerreno() {

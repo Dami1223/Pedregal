@@ -11,15 +11,19 @@ public class Casa {
 	public Casa(int posX, int posY, int frente, int profundidad) {
 		this.posX = posX;
 		this.posY = posY;
-		this.orientacion = designarOrientacion();
-		this.frente = frente;
-		this.profundidad = profundidad;
+		designarOrientacion(frente, profundidad);
 	}
 
-	private char designarOrientacion() {
-		if (posX > posY)
-			return 'O';
-		return 'S';
+	private void designarOrientacion(int frente, int profundidad) {
+		if (frente > profundidad) {
+			this.orientacion = 'S';
+			this.frente = frente;
+			this.profundidad = profundidad;
+		} else {
+			this.orientacion = 'O';
+			this.frente = profundidad;
+			this.profundidad = frente;
+		}
 	}
 
 	public int getPosX() {
@@ -40,6 +44,11 @@ public class Casa {
 
 	public int getProfundidad() {
 		return profundidad;
+	}
+
+	@Override
+	public String toString() {
+		return "X=" + posX + ", Y=" + posY + ", " + orientacion;
 	}
 
 }

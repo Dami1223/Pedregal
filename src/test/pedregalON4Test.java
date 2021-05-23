@@ -11,12 +11,12 @@ import clases.Pedregal_ON4;
 import utils.EntradaSalida;
 
 class pedregalON4Test {
-
+	private final String rutaEntrada = "LoteDePrueba\\Entrada\\pedregal";
 	private Pedregal_ON4 pedregal;
 
 	@Before
 	private void setUp() throws NumberFormatException, IOException {
-		pedregal = new Pedregal_ON4(EntradaSalida.leer("pedregal.in"));
+		pedregal = new Pedregal_ON4(EntradaSalida.leer(rutaEntrada+"_00-Enunciado.in"));
 	}
 
 	@Test
